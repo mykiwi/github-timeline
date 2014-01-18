@@ -2,7 +2,7 @@
 
 Filter your Github timeline by pull requests, issues, stars ...
 
-Exemple:  
+Example:  
 ![Example with stars](screenshot/stars.png)
 
 ---
