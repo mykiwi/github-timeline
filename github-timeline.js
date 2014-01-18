@@ -67,8 +67,8 @@ githubTimeline = {
                 var $line = $(line);
                 $line.css('display', 'none');
 
-                var issueRegexp = new RegExp('issue', 'g');
-                var pullRequestRegexp = new RegExp('pull request', 'g');
+                var issueRegexp = new RegExp(' issue ', 'g');
+                var pullRequestRegexp = new RegExp(' pull request ', 'g');
                 switch ($button.html()) {
                     case 'All':
                         $line.css('display', 'block');
