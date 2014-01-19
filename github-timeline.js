@@ -32,7 +32,7 @@ githubTimeline = {
 
         getItemSelected: function() {
             'use strict';
-            return githubTimeline.css.getItems() + '.selected';
+            return this.getItems() + '.selected';
         }
     },
 
