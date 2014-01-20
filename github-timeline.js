@@ -52,16 +52,16 @@ githubTimeline = {
     menu: {
         select: function(child) {
             'use strict';
-            $(this.css.getItems() + '.selected').removeClass('selected');
+            $(githubTimeline.css.getItems() + '.selected').removeClass('selected');
             child.addClass('selected');
-            this.dashboard.refresh();
+            githubTimeline.dashboard.refresh();
         }
     },
 
     dashboard: {
         refresh: function() {
             'use strict';
-            var $button = $(this.css.getItemSelected());
+            var $button = $(githubTimeline.css.getItemSelected());
 
             $dashboard.find('.alert').each(function(index, line) {
                 var $line = $(line);
