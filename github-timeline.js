@@ -54,6 +54,7 @@ githubTimeline = {
             'use strict';
             $(githubTimeline.css.getItems() + '.selected').removeClass('selected');
             child.addClass('selected');
+            setCookie("ghtl-menu", child.html());
             githubTimeline.dashboard.refresh();
         }
     },
@@ -105,6 +106,23 @@ githubTimeline = {
     }
 };
 
+// Cookie
+function setCookie(sName, sValue)
+{
+    var today = new Date(), expires = new Date();
+    expires.setTime(today.getTime() + (365*24*60*60*1000));
+    document.cookie = sName + "=" + encodeURIComponent(sValue) + ";expires=" + expires.toGMTString();
+}
+
+function getCookie(sName) {
+    var oRegex = new RegExp("(?:; )?" + sName + "=([^;]*);?");
+
+    if (oRegex.test(document.cookie)) {
+        return decodeURIComponent(RegExp["$1"]);
+    }
+
+    return null;
+}
 
 // Workflow
 
@@ -118,6 +136,11 @@ window.addEventListener('load', function() {
     $(document).on('click', githubTimeline.css.getItems(), function() {
         githubTimeline.menu.select($(this));
     });
+
+    var menuSelected = getCookie("ghtl-menu");
+    if (menuSelected != null) {
+        $(githubTimeline.css.getItems()).parent().find('a:contains("' + menuSelected + '")').trigger('click');
+    }
 
     $(document).ajaxComplete(function(event, request, options) {
         var urlMore = /\/dashboard\/index\/\d+/g
