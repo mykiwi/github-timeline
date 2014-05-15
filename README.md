@@ -23,12 +23,9 @@ Example:
 
 ### Install for Chrome
 
- * Press WinKey+R
- * Type:
-```
-chrome --enable-easy-off-store-extension-install https://github.com/downloads/romqin/github-timeline/github-timeline.js
-```
-* Press enter, confirm installation at the bottom
+ * Install [Tampermonkey](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo)
+ * Create a new script like these:
+![Tampermonkey configuration](screenshot/chrome.png)
 
 
 ### Install for Safari
