@@ -4,7 +4,7 @@
 // @description Filter your github timeline
 // @include     https://github.com/
 // @version     1.0
-// @downloadURL https://github.com/MyKiwi/github-timeline
+// @updateURL   https://rawgit.com/romqin/github-timeline/master/github-timeline.js
 // @run-at      document-end
 // @grant       none
 // ==/UserScript==
