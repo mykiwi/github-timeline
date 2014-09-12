@@ -143,7 +143,7 @@ window.addEventListener('load', function() {
     }
 
     $(document).ajaxComplete(function(event, request, options) {
-        var urlMore = /\/dashboard\/index\/\d+/g
+        var urlMore = /\/dashboard\?page=\d+/g
         if (urlMore.test(options.url)) {
             githubTimeline.dashboard.refresh();
         }
