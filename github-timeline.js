@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name        Github Timeline
-// @namespace   https://github.com/MyKiwi/github-timeline
+// @namespace   https://github.com/romqin/github-timeline
 // @description Filter your github timeline
 // @include     https://github.com/
 // @version     1.0
