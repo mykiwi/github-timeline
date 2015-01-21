@@ -3,7 +3,7 @@
 // @namespace   https://github.com/romqin/github-timeline
 // @description Filter your github timeline
 // @include     https://github.com/
-// @version     1.0
+// @version     1.1
 // @updateURL   https://rawgit.com/romqin/github-timeline/master/github-timeline.js
 // @run-at      document-end
 // @grant       none
