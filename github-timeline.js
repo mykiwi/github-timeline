@@ -3,7 +3,7 @@
 // @namespace   https://github.com/romqin/github-timeline
 // @description Filter your github timeline
 // @include     https://github.com/
-// @version     1.1
+// @version     1.2
 // @updateURL   https://rawgit.com/romqin/github-timeline/master/github-timeline.js
 // @run-at      document-end
 // @grant       none
@@ -39,12 +39,12 @@ githubTimeline = {
     template: {
         menu: '' +
             '<div id="github-timeline-menu" class="issues-list-options">' +
-            '  <div class="button-group">' +
-            '    <a class="minibutton selected">All</a>' +
-            '    <a class="minibutton">Pull Requests</a>' +
-            '    <a class="minibutton">Issues</a>' +
-            '    <a class="minibutton">Stars</a>' +
-            '    <a class="minibutton">Others</a>' +
+            '  <div class="btn-group">' +
+            '    <a class="btn btn-sm selected">All</a>' +
+            '    <a class="btn btn-sm">Pull Requests</a>' +
+            '    <a class="btn btn-sm">Issues</a>' +
+            '    <a class="btn btn-sm">Stars</a>' +
+            '    <a class="btn btn-sm">Others</a>' +
             '  </div>' +
             '</div>'
     },
