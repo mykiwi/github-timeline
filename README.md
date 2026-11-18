@@ -78,7 +78,12 @@ This bumps the version in `manifest.json` and `package.json`, runs the tests, co
 
 ### GitHub Actions
 
-Actions are pinned to verified commits in `.github/workflows/actions.lock` with [gh-actions-lock](https://github.com/github/gh-actions-lock). After changing a `uses:` line, or to pick up new commits on the pinned tags, run `make lock` and commit the lockfile. CI fails if it is out of sync.
+Actions are pinned to verified commits in `.github/workflows/actions.lock` with [gh-actions-lock](https://github.com/github/gh-actions-lock). Commit the lockfile with the workflows; CI fails if it is out of sync.
+
+```sh
+make gh-action-update   # bump every action to its latest release (major versions included) and re-pin
+make gh-action-verify   # check actions.lock matches the workflows
+```
 
 ```
 manifest.json            Manifest V3, same package for Chrome and Firefox
@@ -87,5 +92,6 @@ src/github-timeline.css  styles, Primer tokens only
 scripts/build.mjs        builds the userscript and the zip (no dependencies)
 test/                    fixture + end-to-end tests
 .github/workflows/       CI, release, lockfile check
-Makefile                 build, test, lock, release
+.github/scripts/         update-actions.sh (make gh-action-update)
+Makefile                 build, test, actions update, release
 ```

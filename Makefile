@@ -1,12 +1,12 @@
 .DEFAULT_GOAL := help
-.PHONY: help install build test screenshots lock lock-verify release
+.PHONY: help install build test screenshots gh-action-update gh-action-verify release
 
 # Playwright's Chromium (branded Google Chrome 137+ ignores --load-extension).
 CHROME ?= $(shell node -e "import('playwright-core').then(m => console.log(m.chromium.executablePath()))" 2>/dev/null)
 export CHROME
 
 help:
-	@grep -hE '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  \033[36m%-12s\033[0m %s\n", $$1, $$2}'
+	@grep -hE '^[a-z-]+:.*## ' $(MAKEFILE_LIST) | awk -F':.*## ' '{printf "  \033[36m%-18s\033[0m %s\n", $$1, $$2}'
 
 node_modules: package.json package-lock.json
 	npm ci
@@ -24,10 +24,10 @@ test: node_modules ## Build and run the end-to-end tests
 screenshots: node_modules ## Build and regenerate screenshots/
 	npm run screenshots
 
-lock: ## Pin GitHub Actions and update .github/workflows/actions.lock
-	gh actions-lock --relock
+gh-action-update: ## Bump GitHub Actions to their latest releases (major versions too), then lock
+	.github/scripts/update-actions.sh
 
-lock-verify: ## Check actions.lock matches the workflows
+gh-action-verify: ## Check actions.lock matches the workflows
 	gh actions-lock --verify
 
 release: ## Bump version, test, commit, tag and push (make release VERSION=x.y.z)

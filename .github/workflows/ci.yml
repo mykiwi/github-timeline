@@ -13,20 +13,41 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4.4.0
+      - uses: actions/checkout@v7.0.1
 
-      - uses: actions/setup-node@v4.4.0
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: 22
           cache: npm
 
       - run: npm ci
 
+      - name: Get Playwright version
+        id: playwright
+        run: echo "version=$(node -p "require('playwright-core/package.json').version")" >> "$GITHUB_OUTPUT"
+
       # Branded Google Chrome (137+) ignores --load-extension, so use Playwright's Chromium.
+      # No --with-deps: the runner image already ships Chrome's system libraries,
+      # and the apt-get step was most of the install time.
+      # Save right after install (not at job end) so a failing test run still caches it.
+      - uses: actions/cache/restore@v6.1.0
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ runner.arch }}-${{ steps.playwright.outputs.version }}
+
       - name: Install Chromium
-        run: |
-          npx playwright-core install --with-deps chromium
-          echo "CHROME=$(node -e "import('playwright-core').then(m => console.log(m.chromium.executablePath()))")" >> "$GITHUB_ENV"
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright-core install chromium
+
+      - uses: actions/cache/save@v6.1.0
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ steps.playwright-cache.outputs.cache-primary-key }}
+
+      - name: Locate Chromium
+        run: echo "CHROME=$(node -e "import('playwright-core').then(m => console.log(m.chromium.executablePath()))")" >> "$GITHUB_ENV"
 
       - run: npm test
 
@@ -40,9 +61,9 @@ jobs:
     permissions:
       contents: write
     steps:
-      - uses: actions/checkout@v4.4.0
+      - uses: actions/checkout@v7.0.1
 
-      - uses: actions/setup-node@v4.4.0
+      - uses: actions/setup-node@v7.1.0
         with:
           node-version: 22
 
