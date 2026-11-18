@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         GitHub Timeline
 // @namespace    https://github.com/mykiwi/github-timeline
-// @version      2.0.0
+// @version      2.0.1
 // @description  Filter your GitHub feed in one click: pull requests, issues, releases, stars, repositories, follows and more.
 // @author       mykiwi
 // @license      MIT
