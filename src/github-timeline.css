@@ -1,0 +1,389 @@
+/*!
+ * GitHub Timeline 2 — styles.
+ * Built on GitHub's own Primer design tokens (CSS variables), so the controls
+ * follow whichever light, dark or high-contrast theme is active.
+ * Fallback values are Primer's light theme.
+ */
+
+[data-ght-hidden] {
+  display: none !important;
+}
+
+#ght-root {
+  container: ght / inline-size;
+  margin: 8px 0 4px;
+  color: var(--fgColor-default, #1f2328);
+  font-family: inherit;
+}
+
+:is(#ght-root, #ght-footer) [hidden],
+#ght-footer[hidden] {
+  display: none !important;
+}
+
+/* Our footer button stands in for GitHub's "More" button. GitHub nests every
+   loaded page in another turbo-frame, so the next "More" can be at any depth. */
+[data-ght-managed] .js-ajax-pagination,
+[data-ght-managed] .ajax-pagination-btn {
+  display: none !important;
+}
+
+/* ---- Segmented control (Primer SegmentedControl) ---------------------- */
+
+#ght-root .ght-bar {
+  display: block;
+}
+
+#ght-root .ght-seg {
+  display: flex;
+  width: 100%;
+  height: var(--control-medium-size, 32px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: var(--controlTrack-bgColor-rest, #e6eaef);
+  border: var(--borderWidth-thin, 1px) solid var(--controlTrack-borderColor-rest, transparent);
+  border-radius: var(--borderRadius-medium, 6px);
+  font-size: var(--text-body-size-medium, 14px);
+  line-height: 20px;
+}
+
+#ght-root .ght-seg-item {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/* Thin dividers between unselected segments. */
+#ght-root .ght-seg-item + .ght-seg-item::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 1px;
+  height: 16px;
+  transform: translateY(-50%);
+  background-color: var(--borderColor-default, #d1d9e0);
+  pointer-events: none;
+}
+
+#ght-root .ght-seg-item:has(> [aria-current="true"])::before,
+#ght-root .ght-seg-item:has(> [aria-current="true"]) + .ght-seg-item::before {
+  opacity: 0;
+}
+
+#ght-root .ght-seg-btn {
+  appearance: none;
+  display: flex;
+  align-items: stretch;
+  width: 100%;
+  height: calc(100% + 2px);
+  margin: -1px 0;
+  padding: 0;
+  color: var(--fgColor-default, #1f2328);
+  font: inherit;
+  font-weight: var(--base-text-weight-normal, 400);
+  text-align: center;
+  background: transparent;
+  border: 0;
+  border-radius: var(--borderRadius-medium, 6px);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+#ght-root .ght-seg-content {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
+  margin: 4px;
+  padding: 0 4px;
+  white-space: nowrap;
+  border: var(--borderWidth-thin, 1px) solid transparent;
+  border-radius: var(--borderRadius-small, 3px);
+  transition: background-color 80ms cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+#ght-root .ght-seg-btn:hover:not([aria-current="true"]) .ght-seg-content {
+  background-color: var(--controlTrack-bgColor-hover, #e0e6eb);
+}
+
+#ght-root .ght-seg-btn:active:not([aria-current="true"]) .ght-seg-content {
+  background-color: var(--controlTrack-bgColor-active, #dae0e7);
+}
+
+#ght-root .ght-seg-btn[aria-current="true"] {
+  font-weight: var(--base-text-weight-semibold, 600);
+  cursor: default;
+}
+
+#ght-root .ght-seg-btn[aria-current="true"] .ght-seg-content {
+  margin: 0;
+  padding: 0 8px;
+  background-color: var(--controlKnob-bgColor-rest, #fff);
+  border-color: var(--controlKnob-borderColor-rest, #d1d9e0);
+  border-radius: var(--borderRadius-medium, 6px);
+}
+
+#ght-root .ght-seg-btn:focus {
+  outline: none;
+}
+
+#ght-root .ght-seg-btn:focus-visible .ght-seg-content {
+  outline: 2px solid var(--focus-outlineColor, #0969da);
+  outline-offset: -2px;
+}
+
+#ght-root .ght-seg-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+#ght-root .ght-icon {
+  display: none;
+  flex: none;
+  fill: currentColor;
+  color: var(--fgColor-muted, #59636e);
+  vertical-align: text-bottom;
+}
+
+#ght-root .ght-seg-btn[aria-current="true"] .ght-icon {
+  color: var(--fgColor-default, #1f2328);
+}
+
+/* ---- Counter (Primer Counter) ----------------------------------------- */
+
+#ght-root .ght-counter {
+  display: inline-block;
+  flex: none;
+  min-width: 20px;
+  padding: 0 6px;
+  color: var(--fgColor-default, #1f2328);
+  font-size: 12px;
+  font-weight: var(--base-text-weight-medium, 500);
+  line-height: 18px;
+  text-align: center;
+  background-color: var(--bgColor-neutral-muted, #818b981f);
+  border: var(--borderWidth-thin, 1px) solid var(--counter-borderColor, transparent);
+  border-radius: 2em;
+}
+
+#ght-root .ght-counter[data-zero] {
+  color: var(--fgColor-muted, #59636e);
+}
+
+/* ---- Responsive: labels → icons → icons only -------------------------- */
+
+@container ght (max-width: 799px) {
+  #ght-root .ght-seg-label {
+    display: none;
+  }
+  #ght-root .ght-icon {
+    display: inline-block;
+  }
+}
+
+@container ght (max-width: 459px) {
+  #ght-root .ght-counter {
+    display: none;
+  }
+}
+
+/* ---- Status line ------------------------------------------------------ */
+
+#ght-root .ght-status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-top: 8px;
+  color: var(--fgColor-muted, #59636e);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+:is(#ght-root, #ght-footer) .ght-link {
+  appearance: none;
+  padding: 0;
+  color: var(--fgColor-accent, #0969da);
+  font: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+:is(#ght-root, #ght-footer) .ght-link:hover {
+  text-decoration: underline;
+}
+
+/* ---- Empty state (Primer Blankslate) ---------------------------------- */
+
+#ght-root .ght-empty {
+  margin-top: 16px;
+  padding: 32px 24px;
+  text-align: center;
+  background-color: var(--bgColor-default, #fff);
+  border: var(--borderWidth-thin, 1px) solid var(--borderColor-default, #d1d9e0);
+  border-radius: var(--borderRadius-medium, 6px);
+}
+
+#ght-root .ght-empty-icon {
+  margin-bottom: 8px;
+  fill: var(--fgColor-muted, #59636e);
+}
+
+#ght-root .ght-empty-title {
+  margin: 0 0 4px;
+  color: var(--fgColor-default, #1f2328);
+  font-size: 16px;
+  font-weight: var(--base-text-weight-semibold, 600);
+  line-height: 24px;
+}
+
+#ght-root .ght-empty-desc {
+  max-width: 440px;
+  margin: 0 auto 16px;
+  color: var(--fgColor-muted, #59636e);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+#ght-root .ght-empty-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* ---- Buttons (Primer Button) ------------------------------------------ */
+
+:is(#ght-root, #ght-footer) .ght-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: var(--control-medium-size, 32px);
+  padding: 0 12px;
+  color: var(--button-default-fgColor-rest, var(--fgColor-default, #1f2328));
+  font: inherit;
+  font-size: 14px;
+  font-weight: var(--base-text-weight-medium, 500);
+  line-height: 20px;
+  white-space: nowrap;
+  background-color: var(--button-default-bgColor-rest, #f6f8fa);
+  border: var(--borderWidth-thin, 1px) solid var(--button-default-borderColor-rest, #d1d9e0);
+  border-radius: var(--borderRadius-medium, 6px);
+  box-shadow: var(--button-default-shadow-resting, 0 1px 0 0 #1f23280a);
+  cursor: pointer;
+}
+
+:is(#ght-root, #ght-footer) .ght-btn:hover:not(:disabled) {
+  background-color: var(--button-default-bgColor-hover, #eff2f5);
+  border-color: var(--button-default-borderColor-hover, #d1d9e0);
+}
+
+:is(#ght-root, #ght-footer) .ght-btn:focus-visible {
+  outline: 2px solid var(--focus-outlineColor, #0969da);
+  outline-offset: -2px;
+}
+
+:is(#ght-root, #ght-footer) .ght-btn:disabled {
+  color: var(--fgColor-disabled, #818b98);
+  cursor: default;
+}
+
+:is(#ght-root, #ght-footer) .ght-btn--invisible {
+  color: var(--button-invisible-fgColor-rest, var(--fgColor-default, #1f2328));
+  background-color: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+:is(#ght-root, #ght-footer) .ght-btn--invisible:hover:not(:disabled) {
+  background-color: var(--button-invisible-bgColor-hover, #818b981a);
+  border-color: transparent;
+}
+
+:is(#ght-root, #ght-footer) .ght-btn-icon {
+  fill: var(--fgColor-muted, #59636e);
+}
+
+/* ---- Footer: "Load more" ---------------------------------------------- */
+
+#ght-footer {
+  margin: 8px 0 0;
+  text-align: center;
+}
+
+#ght-footer .ght-btn--more {
+  justify-content: center;
+  width: 100%;
+  color: var(--fgColor-accent, #0969da);
+  font-weight: var(--base-text-weight-semibold, 600);
+  background-color: var(--bgColor-default, #fff);
+}
+
+#ght-footer .ght-btn--more:hover:not([aria-disabled="true"]) {
+  background-color: var(--bgColor-muted, #f6f8fa);
+}
+
+#ght-footer .ght-btn--more .ght-btn-icon {
+  fill: currentColor;
+}
+
+#ght-footer .ght-btn--more[aria-disabled="true"] {
+  color: var(--fgColor-muted, #59636e);
+  cursor: progress;
+}
+
+#ght-footer .ght-spinner {
+  display: none;
+  flex: none;
+}
+
+#ght-footer .ght-btn--more[data-loading] .ght-btn-icon {
+  display: none;
+}
+
+#ght-footer .ght-btn--more[data-loading] .ght-spinner {
+  display: inline-block;
+  animation: ght-spin 1s linear infinite;
+}
+
+#ght-footer .ght-footer-note {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 4px;
+  margin: 8px 0 0;
+  color: var(--fgColor-muted, #59636e);
+  font-size: 12px;
+  line-height: 18px;
+}
+
+@keyframes ght-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #ght-footer .ght-btn--more[data-loading] .ght-spinner {
+    animation-duration: 3s;
+  }
+  #ght-root .ght-seg-content {
+    transition: none;
+  }
+}
+
+@media (forced-colors: active) {
+  #ght-root .ght-seg-btn[aria-current="true"] .ght-seg-content {
+    border-color: Highlight;
+  }
+}

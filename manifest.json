@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "GitHub Timeline",
+  "short_name": "GH Timeline",
+  "version": "2.0.0",
+  "description": "Filter your GitHub feed in one click: pull requests, issues, releases, stars, repositories, follows and more.",
+  "homepage_url": "https://github.com/mykiwi/github-timeline",
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://github.com/*"],
+      "js": ["src/github-timeline.js"],
+      "css": ["src/github-timeline.css"],
+      "run_at": "document_idle"
+    }
+  ],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "github-timeline@mykiwi.github.io",
+      "strict_min_version": "142.0",
+      "data_collection_permissions": {
+        "required": ["none"]
+      }
+    }
+  }
+}

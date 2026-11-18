@@ -1,0 +1,17 @@
+{
+  "name": "github-timeline",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Filter your GitHub feed in one click: pull requests, issues, releases, stars, repositories, follows and more.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "npm run build && node test/run.mjs",
+    "screenshots": "npm run build && node test/run.mjs --screenshots"
+  },
+  "devDependencies": {
+    "@primer/primitives": "^11.0.0",
+    "playwright-core": "^1.63.0"
+  }
+}
